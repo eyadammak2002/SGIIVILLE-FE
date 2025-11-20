@@ -20,4 +20,8 @@ export class InterventionService {
   updateStatut(interventionId: number, statut: string): Observable<Intervention> {
     return this.http.patch<Intervention>(`${this.baseUrl}/${interventionId}`, { statut: statut });
   }
+
+  affecterTechnicien(interventionId: number, technicienId: number): Observable<Intervention> {
+    return this.http.put<Intervention>(`${this.baseUrl}/${interventionId}/affecter`, { technicienId });
+  }
 }

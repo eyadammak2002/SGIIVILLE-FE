@@ -17,7 +17,7 @@ export class DemandeService {
     return this.http.get<Demande>(`${this.baseUrl}/${id}`);
   }
 
-  createDemande(demande: Demande): Observable<Demande> {
+  createDemande(demande: Partial<Demande> | any): Observable<Demande> {
     return this.http.post<Demande>(this.baseUrl, demande);
   }
 

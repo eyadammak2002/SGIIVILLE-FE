@@ -1,0 +1,41 @@
+<div class="chef-dashboard">
+  <header>
+    <h1>Dashboard Chef de Service</h1>
+    <button class="btn-logout" (click)="logout()">Déconnexion</button>
+  </header>
+  
+  <div class="section">
+    <h2>Demandes en Attente ({{demandes.length}})</h2>
+    <table>
+      <tr *ngFor="let d of demandes">
+        <td>#{{d.id}}</td>
+        <td>{{d.description}}</td>
+        <td>{{d.etat}}</td>
+        <td><button (click)="planifier(d.id)">Planifier</button></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Interventions ({{interventions.length}})</h2>
+    <table>
+      <tr *ngFor="let i of interventions">
+        <td>#{{i.id}}</td>
+        <td>{{i.etat}}</td>
+        <td>{{i.datePlanifiee}}</td>
+        <td>Tech: {{i.technicienId || 'Non affecté'}}</td>
+        <td><button *ngIf="!i.technicienId" (click)="affecterTech(i)">Affecter</button></td>
+      </tr>
+    </table>
+  </div>
+
+  <div *ngIf="showAffectation" class="modal">
+    <div class="modal-content">
+      <h3>Affecter un technicien</h3>
+      <div *ngFor="let tech of techniciens">
+        <button (click)="confirmerAffectation(tech.id)">{{tech.nom}}</button>
+      </div>
+      <button (click)="showAffectation = false">Annuler</button>
+    </div>
+  </div>
+</div>

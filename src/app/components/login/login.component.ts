@@ -38,7 +38,8 @@ export class LoginComponent {
     this.authService.login(this.credentials).subscribe({
       next: (response) => {
         console.log('Connexion réussie', response);
-        this.router.navigate(['/home']);
+        // Redirection basée sur le rôle de l'utilisateur
+        this.redirectBasedOnRole(response.role);
       },
       error: (error) => {
         console.error('Erreur de connexion', error);
@@ -49,5 +50,24 @@ export class LoginComponent {
         this.isLoading = false;
       }
     });
+  }
+
+  private redirectBasedOnRole(role: string): void {
+    switch(role) {
+      case 'ADMINISTRATEUR':
+        this.router.navigate(['/admin']);
+        break;
+      case 'CHEF_SERVICE':
+        this.router.navigate(['/chef']);
+        break;
+      case 'TECHNICIEN':
+        this.router.navigate(['/technicien']);
+        break;
+      case 'CITOYEN':
+        this.router.navigate(['/citoyen']);
+        break;
+      default:
+        this.router.navigate(['/home']);
+    }
   }
 }
