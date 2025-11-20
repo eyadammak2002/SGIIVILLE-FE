@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DemandeFormComponent } from '../demande-form/demande-form.component';
 import { Router } from '@angular/router';
 import { DemandeService } from '../../services/demande.service';
 import { AuthService } from '../../services/auth.service';
@@ -8,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-citoyen-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DemandeFormComponent],
   templateUrl: './citoyen-dashboard.component.html',
   styleUrls: ['./citoyen-dashboard.component.css']
 })

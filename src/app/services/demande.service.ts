@@ -17,8 +17,17 @@ export class DemandeService {
     return this.http.get<Demande>(`${this.baseUrl}/${id}`);
   }
 
-  createDemande(demande: Partial<Demande> | any): Observable<Demande> {
-    return this.http.post<Demande>(this.baseUrl, demande);
+  createDemande(demande: any, files?: File[]): Observable<any> {
+    // If files present, send multipart/form-data with a 'demande' JSON part
+    if (files && files.length > 0) {
+      const fd = new FormData();
+      fd.append('demande', JSON.stringify(demande));
+      files.forEach((f, idx) => fd.append('files', f, f.name));
+      return this.http.post<any>(this.baseUrl, fd);
+    }
+
+    // Otherwise send JSON
+    return this.http.post<any>(this.baseUrl, demande);
   }
 
   planifierIntervention(demandeId: number): Observable<any> {

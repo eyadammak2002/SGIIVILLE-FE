@@ -4,16 +4,12 @@
     <button class="btn-logout" (click)="logout()">Déconnexion</button>
   </header>
 
-  <button class="btn-create" (click)="showCreateForm = !showCreateForm">
-    {{showCreateForm ? 'Annuler' : '+ Nouvelle Demande'}}
-  </button>
+  <div class="actions">
+    <button class="btn-primary" (click)="showCreateForm = !showCreateForm">{{ showCreateForm ? 'Annuler' : 'Signaler un problème' }}</button>
+  </div>
 
   <div *ngIf="showCreateForm" class="form-box">
-    <h2>Créer une Demande</h2>
-    <form (ngSubmit)="creerDemande()">
-      <textarea [(ngModel)]="nouvelleDemande.description" name="desc" placeholder="Description du problème" required></textarea>
-      <button type="submit">Soumettre</button>
-    </form>
+    <app-demande-form></app-demande-form>
   </div>
 
   <div class="demandes-list">

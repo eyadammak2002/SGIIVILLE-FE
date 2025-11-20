@@ -2,6 +2,7 @@ export interface GeoPoint {
   value?: string;
   latitude: number;
   longitude: number;
+  address?: string;
 }
 
 export interface Photo {
@@ -15,7 +16,11 @@ export interface Demande {
   description: string;
   dateSoumission: string;
   etat: 'SOUMISE' | 'EN_ATTENTE' | 'TRAITEE' | 'REJETEE';
-  photos?: Photo[];
+  attachments?: string[];  // Change to string[] (photo IDs); fetch full Photo[] separately if needed
   localisation: GeoPoint;
   citoyenId?: number;
+  category?: string;
+  subCategory?: string;
+  priority?: string;
+  contactEmail?: string;
 }

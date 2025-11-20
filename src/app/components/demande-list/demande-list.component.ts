@@ -15,6 +15,7 @@ export class DemandeListComponent implements OnInit {
   demandes: Demande[] = [];
   selectedDemande: Demande | null = null;
   showForm = false;
+  showDetails = false;
 
   constructor(private demandeService: DemandeService) {}
 
@@ -37,6 +38,13 @@ export class DemandeListComponent implements OnInit {
     this.showForm = true;
   }
 
+  voirDetails(demande: Demande): void {
+    this.selectedDemande = demande;
+    this.showDetails = true;
+    // Optionnel : Fetch photos ici si attachments sont IDs
+    // Ex. : this.demandeService.getPhotosForDemande(demande.id).subscribe(photos => this.selectedDemande.photos = photos);
+  }
+
   submitPlanification(): void {
     if (!this.selectedDemande) return;
 
@@ -57,6 +65,11 @@ export class DemandeListComponent implements OnInit {
 
   annuler(): void {
     this.showForm = false;
+    this.selectedDemande = null;
+  }
+
+  fermerDetails(): void {
+    this.showDetails = false;
     this.selectedDemande = null;
   }
 }
