@@ -1,0 +1,45 @@
+<div class="container">
+  <h1>Gestion des demandes</h1>
+  <h2>Demandes ({{ demandes.length }})</h2>
+
+  <div class="grid">
+    <div class="card" *ngFor="let demande of demandes" [class.traitee]="demande.etat === 'TRAITEE'">
+      <h3>{{ demande.description }}</h3>
+      <p *ngIf="demande.localisation">
+        <strong>Localisation:</strong> {{ demande.localisation.latitude }}, {{ demande.localisation.longitude }}
+      </p>
+      <p><strong>Citoyen:</strong> {{ demande.citoyenId || 'N/A' }}</p>
+      <p><strong>Date:</strong> {{ demande.dateSoumission | date:'short' }}</p>
+      <p><strong>État:</strong>
+        <span [class]="demande.etat === 'TRAITEE' ? 'status-traitee' : 'status-active'">
+          {{ demande.etat }}
+        </span>
+      </p>
+      <button (click)="planifier(demande)"
+              [disabled]="demande.etat === 'TRAITEE'"
+              class="btn-planifier">
+        {{ demande.etat === 'TRAITEE' ? 'Déjà traitée' : 'Planifier' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal de planification -->
+  <div class="modal-overlay" *ngIf="showForm && selectedDemande">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Planifier l'intervention</h2>
+      </div>
+      <div class="modal-content">
+        <p><strong>Demande:</strong> {{ selectedDemande.description }}</p>
+        <p *ngIf="selectedDemande.localisation">
+          <strong>Localisation:</strong> {{ selectedDemande.localisation.latitude }}, {{ selectedDemande.localisation.longitude }}
+        </p>
+        <p>La priorité sera fixée à <strong>URGENTE</strong></p>
+      </div>
+      <div class="modal-actions">
+        <button (click)="submitPlanification()" class="btn-confirm">Confirmer la planification</button>
+        <button (click)="annuler()" class="btn-cancel">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
