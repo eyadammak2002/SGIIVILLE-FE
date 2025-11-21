@@ -62,7 +62,7 @@ h2 {
   font-weight: bold;
 }
 
-.btn-planifier {
+.btn-planifier, .btn-details {
   background-color: #3498db;
   color: white;
   border: none;
@@ -73,9 +73,14 @@ h2 {
   margin-top: 10px;
   width: 100%;
   transition: background-color 0.2s;
+  margin-right: 10px; /* Si côte à côte */
 }
 
-.btn-planifier:hover:not(:disabled) {
+.btn-details {
+  background-color: #6c757d; /* Gris pour différencier */
+}
+
+.btn-planifier:hover:not(:disabled), .btn-details:hover:not(:disabled) {
   background-color: #2980b9;
 }
 
@@ -151,7 +156,7 @@ h2 {
   background-color: #229954;
 }
 
-.btn-cancel {
+.btn-cancel, .btn-close {
   flex: 1;
   background-color: #e74c3c;
   color: white;
@@ -163,6 +168,22 @@ h2 {
   transition: background-color 0.2s;
 }
 
-.btn-cancel:hover {
+.btn-close {
+  background-color: #6c757d; /* Gris pour fermer */
+}
+
+.btn-cancel:hover, .btn-close:hover {
   background-color: #c0392b;
+}
+
+/* Améliorations pour détails */
+.details-list {
+  list-style: none;
+  padding: 0;
+}
+
+.details-list li {
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  color: #333;
 }

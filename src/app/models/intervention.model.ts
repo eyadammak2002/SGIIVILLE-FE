@@ -4,6 +4,6 @@ export interface Intervention {
   etat: 'EN_ATTENTE' | 'EN_COURS' | 'SUSPENDUE' | 'TERMINEE';
   datePlanifiee: string;
   budget: number;
-  demandeId?: number;
   technicienId?: number;
+  demandeId?: number; // Ajout de ce champ
 }

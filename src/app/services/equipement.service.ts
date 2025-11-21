@@ -1,18 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Equipement } from '../models/equipement.model';
 
-export interface Equipement {
-  id: number;
-  nom: string;
-  type: string;
-  etat: string;
-  localisation?: any;
-}
-
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class EquipementService {
-  private baseUrl = 'http://localhost:8080/api/equipements';
+  private readonly baseUrl = 'http://localhost:8080/api/equipements';
 
   constructor(private http: HttpClient) {}
 
@@ -24,11 +19,11 @@ export class EquipementService {
     return this.http.get<Equipement>(`${this.baseUrl}/${id}`);
   }
 
-  createEquipement(equipement: Equipement): Observable<Equipement> {
+  createEquipement(equipement: Omit<Equipement, 'id'>): Observable<Equipement> {
     return this.http.post<Equipement>(this.baseUrl, equipement);
   }
 
-  updateEquipement(id: number, equipement: Equipement): Observable<Equipement> {
+  updateEquipement(id: number, equipement: Partial<Equipement>): Observable<Equipement> {
     return this.http.put<Equipement>(`${this.baseUrl}/${id}`, equipement);
   }
 
